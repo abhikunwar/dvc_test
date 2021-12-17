@@ -16,9 +16,22 @@ stages:
       - src/stage_02_split_data.py
       - src/utils/all_utils.py
       - config/config.yaml
+      - artifacts/raw_local_dir/data.csv 
     params:  
       - base.random_state
       - base.test_size
     outs:
       - artifacts/slit_data_dir/test.csv 
       - artifacts/slit_data_dir/train.csv    
+
+  train_data:
+    cmd: python src/stage_03_model_train.py --config=config/config.yaml --param=params.yaml
+    deps:
+      - src/stage_03_model_train.py
+      - src/utils/all_utils.py
+      - config/config.yaml
+      - artifacts/slit_data_dir/train.csv 
+    params:  
+      - model_param.ElasticNet.params.alpha
+      - model_param.ElasticNet.params.l1_ratio
+      - model_param.ElasticNet.params.random_state

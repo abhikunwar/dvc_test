@@ -8,3 +8,6 @@ artifacts:
   train_data: train.csv
 
   test_data: test.csv
+
+  model_dir: model_dir
+  model_filename: ElasticNet.model

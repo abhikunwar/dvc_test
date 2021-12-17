@@ -41,3 +41,23 @@ stages:
     - path: artifacts/slit_data_dir/train.csv
       md5: f675b747b3a442251a0a8e03ea3c8324
       size: 65540
+  train_data:
+    cmd: python src/stage_03_model_train.py --config=config/config.yaml --param=params.yaml
+    deps:
+    - path: artifacts/slit_data_dir/train.csv
+      md5: f675b747b3a442251a0a8e03ea3c8324
+      size: 65540
+    - path: config/config.yaml
+      md5: 5f4e12fb279bc9a49c854da470e67f30
+      size: 289
+    - path: src/stage_03_model_train.py
+      md5: 0ecf64a288f9c1b4d22e31cb2e7f5720
+      size: 1621
+    - path: src/utils/all_utils.py
+      md5: 09a73eacd90fefebcaf167c78f633ad6
+      size: 422
+    params:
+      params.yaml:
+        model_param.ElasticNet.params.alpha: 0.5
+        model_param.ElasticNet.params.l1_ratio: 0.5
+        model_param.ElasticNet.params.random_state: 42
