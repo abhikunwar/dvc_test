@@ -35,3 +35,14 @@ stages:
       - model_param.ElasticNet.params.alpha
       - model_param.ElasticNet.params.l1_ratio
       - model_param.ElasticNet.params.random_state
+
+  evaluate_model:
+    cmd: python src/stage_04_model_evaluation.py --config=config/config.yaml --param=params.yaml
+    deps:
+      - src/stage_04_model_evaluation.py
+      - src/utils/all_utils.py
+      - config/config.yaml
+      - artifacts/slit_data_dir/test.csv 
+      - artifacts/model_dir/ElasticNet.model
+    outs:
+      - artifacts/score_dir/score_file.json
